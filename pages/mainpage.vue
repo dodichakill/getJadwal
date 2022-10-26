@@ -30,7 +30,6 @@
           <CardJadwal hari="Rabu" jumlahmatkul="3"></CardJadwal>
           <CardJadwal hari="Kamis" jumlahmatkul="3"></CardJadwal>
           <CardJadwal hari="Jumat" jumlahmatkul="3"></CardJadwal>
-          <CardJadwal hari="Sabtu" jumlahmatkul="3"></CardJadwal>
         </div>
         <!-- card jadwal end -->
       </div>
@@ -54,18 +53,31 @@
           name="matakuliah"
           data-cy="form-matkul"
           id="matakuliah"
-          class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5"
+          class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
           placeholder="Masukan Mata Kuliah"
         />
-        <label for="pilihhari" class="font-semibold">Pilih Hari</label>
-        <input
-          type="text"
+        <label for="day" class="font-semibold">Pilih Hari</label>
+        <!-- <input
+          type="se"
           name="pilihhari"
           data-cy="form-day"
           id="pilihhari"
           class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full"
           placeholder="Pilih Hari"
-        />
+        /> -->
+        <select
+          name="day"
+          id="day"
+          class="block px-3 py-2 w-full bg-white border-2 rounded-lg cus:outline-2 focus:outline-pink-400"
+          data-cy="form-day"
+          placeholder="Pilih Hari"
+        >
+          <option value="Senin">Senin</option>
+          <option value="Selasa">Selasa</option>
+          <option value="Rabu">Rabu</option>
+          <option value="Kamis">Kamis</option>
+          <option value="Jumat">Jumat</option>
+        </select>
 
         <div
           class="mt-6 text-white border-t-2 font-semibold flex justify-between"
