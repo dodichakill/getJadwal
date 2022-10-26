@@ -40,11 +40,15 @@
       class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
     >
       <!-- modal content start -->
-      <div class="p-9 bg-white w-96 m-auto h-96 rounded-lg" data-cy="form-add">
+      <div class="p-8 bg-white w-96 m-auto h-96 rounded-lg" data-cy="form-add">
         <h2 class="text-center mb-5 text-2xl font-semibold">
           Buat Jadwal Kuliah
         </h2>
-        <label for="matakuliah" class="font-semibold">Mata Kuliah</label>
+        <label
+          for="matakuliah"
+          class="font-semibold border-t-2 w-full block pt-3"
+          >Mata Kuliah</label
+        >
         <input
           type="text"
           name="matakuliah"
