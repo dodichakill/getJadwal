@@ -1,5 +1,5 @@
 <template>
-  <div class="w-48">
+  <div class="w-full">
     <div class="head p-5 bg-white special-round cursor-pointer">
       <p class="day font-semibold text-2xl" :data-cy="'card-title-' + hari">
         {{ hari }}
