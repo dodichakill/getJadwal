@@ -8,7 +8,6 @@
         {{ jumlahmatkul }} Mata Kuliah
       </p>
     </div>
-
     <div class="body p-2 bg-white mt-5 special-round">
       <div class="item p-3 bg-slate-100 mb-1">Statistik</div>
       <div class="item p-3 bg-slate-100 mb-1">Statistik</div>

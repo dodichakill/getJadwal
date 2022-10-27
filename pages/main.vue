@@ -57,14 +57,6 @@
           placeholder="Masukan Mata Kuliah"
         />
         <label for="day" class="font-semibold">Pilih Hari</label>
-        <!-- <input
-          type="se"
-          name="pilihhari"
-          data-cy="form-day"
-          id="pilihhari"
-          class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full"
-          placeholder="Pilih Hari"
-        /> -->
         <select
           name="day"
           id="day"
@@ -90,7 +82,7 @@
             <span class="ml-2">Batalkan</span>
           </button>
           <button
-            class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-xl shadow-pink-300"
+            class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-xl shadow-pink-300"
             data-cy="btn-submit"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
