@@ -5,7 +5,7 @@
     </header>
     <div class="h-screen w-full bg-slate-200 flex justify-center">
       <!-- card start -->
-      <div class="px-10 py-5 bg-white w-96 h-80 mt-48 rounded-md shadow-xl">
+      <div class="px-10 py-5 bg-white w-96 h-80 mt-48 rounded-md shadow-lg">
         <h1
           class="text-center font-semibold text-2xl mb-10 mt-5"
           data-cy="text-login"
@@ -29,7 +29,7 @@
           >
         </p>
         <button
-          class="rounded-full mt-3 shadow-xl shadow-pink-300 bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white px-2 py-4 w-full font-bold"
+          class="rounded-full mt-3 shadow-lg shadow-pink-300 bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white px-2 py-4 w-full font-bold"
           data-cy="btn-login"
         >
           Mulai Sesi

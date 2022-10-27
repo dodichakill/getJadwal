@@ -15,7 +15,7 @@
       <div class="container m-auto">
         <!-- btn create schedule start -->
         <button
-          class="rounded-full bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white h-14 px-4 py-4 font-bold mt-12 mb-10 shadow-xl shadow-pink-300"
+          class="rounded-full bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white h-14 px-4 py-4 font-bold mt-12 mb-10 shadow-lg shadow-pink-300"
           data-cy="btn-create-schedule"
         >
           <font-awesome-icon icon="fa-solid fa-plus" />
@@ -75,14 +75,14 @@
           class="mt-6 text-white border-t-2 font-semibold flex justify-between"
         >
           <button
-            class="px-6 py-2 bg-white border-2 border-red-400 text-red-400 rounded-full mt-5 shadow-xl shadow-red-300"
+            class="px-6 py-2 bg-white border-2 border-red-400 text-red-400 rounded-full mt-5 shadow-lg shadow-red-300"
             data-cy="close-modal"
           >
             <font-awesome-icon icon="fa-solid fa-circle-xmark" />
             <span class="ml-2">Batalkan</span>
           </button>
           <button
-            class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-xl shadow-pink-300"
+            class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
