@@ -73,5 +73,51 @@
         <!-- card item end -->
       </div>
     </div>
+
+    <!-- modal add jadwal start-->
+    <div
+      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
+    >
+      <!-- modal content start -->
+      <div class="p-8 bg-white w-96 m-auto h-72 rounded-lg" data-cy="form-add">
+        <h2 class="text-center mb-5 text-2xl font-semibold">
+          Buat Jadwal Kuliah
+        </h2>
+        <label
+          for="matakuliah"
+          class="font-semibold border-t-2 w-full block pt-3"
+          >Mata Kuliah</label
+        >
+        <input
+          type="text"
+          name="matakuliah"
+          data-cy="form-matkul"
+          id="matakuliah"
+          class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
+          placeholder="Masukan Mata Kuliah"
+        />
+
+        <div
+          class="mt-6 text-white border-t-2 font-semibold flex justify-between"
+        >
+          <button
+            class="px-6 py-2 bg-white border-2 border-red-400 text-red-400 rounded-full mt-5 shadow-xl shadow-red-300"
+            data-cy="close-modal"
+          >
+            <font-awesome-icon icon="fa-solid fa-circle-xmark" />
+            <span class="ml-2">Batalkan</span>
+          </button>
+          <button
+            class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-xl shadow-pink-300"
+            data-cy="btn-submit"
+          >
+            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+            <span class="ml-2">Simpan</span>
+          </button>
+        </div>
+      </div>
+      <!-- modal content end -->
+    </div>
+    <!-- modal add jadwal end-->
   </div>
 </template>
