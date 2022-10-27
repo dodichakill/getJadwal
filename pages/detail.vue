@@ -178,7 +178,7 @@
 
     <!-- modal hapus jadwal start-->
     <div
-      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
+      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex hidden"
     >
       <!-- modal content start -->
       <form
@@ -219,5 +219,14 @@
       <!-- modal content end -->
     </div>
     <!-- modal edit jadwal end-->
+
+    <!-- toast start -->
+    <p
+      class="toast px-3 py-2 w-72 m-auto rounded-lg bg-green-400 inlineblock absolute top-16 left-0 right-0 shadow shadow-green-200 hidden"
+    >
+      <font-awesome-icon icon="fa-solid fa-circle-check" class="ml-2" />
+      <span class="ml-2"> mata kuliah berhasil dihapus </span>
+    </p>
+    <!-- toast end -->
   </div>
 </template>
