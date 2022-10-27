@@ -36,7 +36,7 @@
         </div>
 
         <!-- image empty start -->
-        <div class="flex">
+        <div class="flex hidden">
           <img
             src="todo-empty-state.png"
             alt="image-todo-empty"
@@ -45,6 +45,32 @@
           />
         </div>
         <!-- image empty end -->
+
+        <!-- card item start -->
+        <div class="card-item-container w-full mt-10" data-cy="card-item-title">
+          <div
+            class="px-5 py-3 rounded-lg flex bg-white items-center justify-between mt-2 shadow-md"
+          >
+            <div class="item-name text-xl text-slate-600">Statistika cuy</div>
+            <div class="action text-xl">
+              <button
+                class="p-2 text-slate-400 hover:text-slate-500"
+                title="edit jadwal"
+                data-cy="card-item-edit"
+              >
+                <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+              </button>
+              <button
+                class="p-2 text-slate-400 hover:text-red-500"
+                title="hapus jadwal"
+                data-cy="card-item-delete"
+              >
+                <font-awesome-icon icon="fa-solid fa-trash" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- card item end -->
       </div>
     </div>
   </div>
