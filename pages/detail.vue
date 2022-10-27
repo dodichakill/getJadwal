@@ -132,7 +132,7 @@
       <!-- modal content start -->
       <form
         class="p-8 bg-white w-96 m-auto h-72 rounded-lg"
-        data-cy="form-edit"
+        data-cy="detail-form"
         name="edit"
       >
         <h2 class="text-center mb-5 text-2xl font-semibold">
@@ -183,8 +183,8 @@
       <!-- modal content start -->
       <form
         class="p-8 bg-white w-96 m-auto h-72 rounded-lg flex justify-center items-center flex-col"
-        data-cy="form-edit"
-        name="edit"
+        data-cy="form-delete"
+        name="delete"
       >
         <div
           class="logo px-5 py-4 w-16 rounded-full h-16 bg-red-400 text-3xl text-white flex justify-center items-center"
