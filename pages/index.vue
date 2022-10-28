@@ -21,13 +21,17 @@
           placeholder="masukan alamat email anda"
           required
           data-cy="input-email"
+          v-model="email"
+          @change="validateEmail()"
         />
-        <p class="text-red-500">
-          <font-awesome-icon icon="fa-solid fa-circle-info" />
-          <span class="ml-1" data-cy="error-email"
-            >format email tidak sesuai</span
-          >
-        </p>
+        <div class="if" v-if="error">
+          <p class="text-red-500">
+            <font-awesome-icon icon="fa-solid fa-circle-info" />
+            <span class="ml-1" data-cy="error-email"
+              >format email tidak sesuai</span
+            >
+          </p>
+        </div>
         <button
           class="rounded-full mt-3 shadow-lg shadow-pink-300 bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white px-2 py-4 w-full font-bold"
           data-cy="btn-login"
@@ -41,7 +45,35 @@
 </template>
 
 <script>
+var axios = require("axios");
+var data = '{\r\n    "email": "john@email.com"\r\n}';
+
+var config = {
+  method: "post",
+  url: "https://getjadwal.api.devcode.gethired.id/checkin",
+  headers: {},
+  data: data,
+};
+
 export default {
   name: "IndexPage",
+  data() {
+    return {
+      error: false,
+      email: "",
+    };
+  },
+  methods: {
+    validateEmail() {
+      const elmEmail = document.querySelector('input["email"]');
+      if (
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(elmEmail.value)
+      ) {
+        this.error = false;
+      } else {
+        this.error = true;
+      }
+    },
+  },
 };
 </script>

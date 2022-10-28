@@ -17,6 +17,7 @@
         <button
           class="rounded-full bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white h-14 px-4 py-4 font-bold mt-12 mb-10 shadow-lg shadow-pink-300"
           data-cy="btn-create-schedule"
+          @click="showModalBox"
         >
           <font-awesome-icon icon="fa-solid fa-plus" />
           <span class="ml-2">Buat Jadwal Kuliah</span>
@@ -36,23 +37,22 @@
     </div>
     <!-- modal start-->
     <div
-      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
+      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex ease-in duration-100"
+      v-if="isShowModalBox"
     >
       <!-- modal content start -->
-      <div class="p-8 bg-white w-96 m-auto h-96 rounded-lg" data-cy="form-add">
+      <form class="p-8 bg-white w-96 m-auto h-96 rounded-lg" data-cy="form-add">
         <h2 class="text-center mb-5 text-2xl font-semibold">
           Buat Jadwal Kuliah
         </h2>
-        <label
-          for="matakuliah"
-          class="font-semibold border-t-2 w-full block pt-3"
+        <label for="matkul" class="font-semibold border-t-2 w-full block pt-3"
           >Mata Kuliah</label
         >
         <input
           type="text"
-          name="matakuliah"
+          name="matkul"
           data-cy="form-matkul"
-          id="matakuliah"
+          id="matkul"
           class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
           placeholder="Masukan Mata Kuliah"
         />
@@ -77,6 +77,7 @@
           <button
             class="px-6 py-2 bg-white border-2 border-red-400 text-red-400 rounded-full mt-5 shadow-lg shadow-red-300"
             data-cy="close-modal"
+            @click="hideModalBox"
           >
             <font-awesome-icon icon="fa-solid fa-circle-xmark" />
             <span class="ml-2">Batalkan</span>
@@ -89,9 +90,27 @@
             <span class="ml-2">Simpan</span>
           </button>
         </div>
-      </div>
+      </form>
       <!-- modal content end -->
     </div>
     <!-- modal end-->
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isShowModalBox: false,
+    };
+  },
+  methods: {
+    showModalBox() {
+      this.isShowModalBox = true;
+    },
+    hideModalBox() {
+      this.isShowModalBox = false;
+    },
+  },
+};
+</script>
