@@ -23,6 +23,7 @@
           type="text"
           name="add-matkul"
           data-cy="form-matkul"
+          v-model="newSchedule"
           id="add-matkul"
           class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
           placeholder="Masukan Mata Kuliah"
@@ -42,7 +43,7 @@
           <button
             class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
-            @click="submit_event"
+            @click="addScheduleItem"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             <span class="ml-2">Simpan</span>
@@ -59,9 +60,23 @@
 export default {
   data() {
     return {
-      newMK: "",
+      newSchedule: "",
     };
   },
   props: ["state_event", "hide_event", "submit_event"],
+  methods: {
+    async addScheduleItem() {
+      await this.$axios
+        .$post("schedule?email=" + localStorage.getItem("USER_EMAIL"), {
+          title: this.newSchedule,
+          day: this.$route.params.day,
+        })
+        .then((response) => {
+          const result = response.data;
+          console.log(result);
+          console.log(this.day);
+        });
+    },
+  },
 };
 </script>
