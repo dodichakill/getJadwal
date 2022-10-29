@@ -51,6 +51,17 @@
           class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
           data-cy="btn-submit"
           @click="addScheduleItem"
+          v-if="title && day"
+        >
+          <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+          <span class="ml-2">Simpan</span>
+        </button>
+
+        <button
+          class="px-6 py-2 border-slate-400 border-2 bg-slate-400 rounded-full mt-5 shadow-lg shadow-slate-300 cursor-not-allowed"
+          data-cy="btn-submit"
+          disabled
+          v-else
         >
           <font-awesome-icon icon="fa-solid fa-floppy-disk" />
           <span class="ml-2">Simpan</span>

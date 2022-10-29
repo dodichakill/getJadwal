@@ -47,7 +47,10 @@
           </button>
         </div>
 
-        <ImageEmptyItem :condition="scheduleLength" />
+        <ImageEmptyItem
+          :condition="scheduleLength"
+          v-if="listSchedules.length == 0"
+        />
 
         <!-- list item MK start-->
         <div class="container w-full mt-5" v-for="item in listSchedules">
