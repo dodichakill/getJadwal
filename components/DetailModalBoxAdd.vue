@@ -42,7 +42,7 @@
           <button
             class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
-            type="submit"
+            @click="submit_event"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             <span class="ml-2">Simpan</span>
@@ -58,8 +58,10 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      newMK: "",
+    };
   },
-  props: ["state_event", "hide_event"],
+  props: ["state_event", "hide_event", "submit_event"],
 };
 </script>

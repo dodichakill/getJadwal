@@ -56,6 +56,7 @@
     <DetailModalBoxAdd
       :state_event="isShowAddModalBox"
       :hide_event="hideAddModalBox"
+      :submit_event="addScheduleItem"
     />
 
     <DetailModalBoxEdit
@@ -118,7 +119,7 @@ export default {
     async addScheduleItem() {
       await this.$axios
         .$post("schedule?email=" + localStorage.getItem("USER_EMAIL"), {
-          title: "Algoritma dasar",
+          title: this.newMK,
           day: this.day,
         })
         .then((response) => {

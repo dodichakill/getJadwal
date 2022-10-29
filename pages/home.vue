@@ -27,11 +27,7 @@
 
         <!-- card jadwal start -->
         <div class="card-container flex gap-4 w-full">
-          <CardJadwal hari="monday" :jumlahmk="jumlahMKSenin"></CardJadwal>
-          <CardJadwal hari="tuesday" :jumlahmk="jumlahMKSelasa"></CardJadwal>
-          <CardJadwal hari="wednesday" :jumlahmk="jumlahMKRabu"></CardJadwal>
-          <CardJadwal hari="thursday" :jumlahmk="jumlahMKKamis"></CardJadwal>
-          <CardJadwal hari="friday" :jumlahmk="jumlahMKJumat"></CardJadwal>
+          <CardJadwal />
         </div>
         <!-- card jadwal end -->
       </div>
@@ -62,11 +58,6 @@ export default {
     return {
       isShowModalBox: false,
       email: userEmail,
-      jumlahMKSenin: 0,
-      jumlahMKSelasa: 0,
-      jumlahMKRabu: 0,
-      jumlahMKKamis: 0,
-      jumlahMKJumat: 0,
     };
   },
   mounted() {
@@ -75,18 +66,20 @@ export default {
     // }
   },
   methods: {
-    async getAllSchedule() {
+    async getDetailItemSchedule() {
       await this.$axios
-        .$get("schedule?email=" + localStorage.getItem("USER_EMAIL"))
+        .$get(
+          "/schedule?email=" +
+            localStorage.getItem("USER_EMAIL") +
+            "&day=" +
+            this.day
+        )
         .then((response) => {
-          const result = response.data;
-          this.jumlahMKSenin = result.monday;
-          this.jumlahMKSelasa = result.tuesday;
-          this.jumlahMKRabu = result.wednesday;
-          this.jumlahMKKamis = result.thursday;
-          this.jumlahMKJumat = result.friday;
+          this.listSchedules = response.data;
+          console.log(this.listSchedules);
         });
     },
+
     showModalBox() {
       this.isShowModalBox = true;
     },
