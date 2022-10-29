@@ -15,6 +15,7 @@
         type="text"
         name="matkul"
         data-cy="form-matkul"
+        v-model="title"
         id="matkul"
         class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
         placeholder="Masukan Mata Kuliah"
@@ -26,12 +27,13 @@
         class="block px-3 py-2 w-full bg-white border-2 rounded-lg cus:outline-2 focus:outline-pink-400"
         data-cy="form-day"
         placeholder="Pilih Hari"
+        v-model="day"
       >
-        <option value="Senin">Senin</option>
-        <option value="Selasa">Selasa</option>
-        <option value="Rabu">Rabu</option>
-        <option value="Kamis">Kamis</option>
-        <option value="Jumat">Jumat</option>
+        <option value="monday">Senin</option>
+        <option value="tuesday">Selasa</option>
+        <option value="wednesday">Rabu</option>
+        <option value="thursday">Kamis</option>
+        <option value="friday">Jumat</option>
       </select>
 
       <div
@@ -46,8 +48,9 @@
           <span class="ml-2">Batalkan</span>
         </button>
         <button
-          class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
+          class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
           data-cy="btn-submit"
+          @click="addScheduleItem"
         >
           <font-awesome-icon icon="fa-solid fa-floppy-disk" />
           <span class="ml-2">Simpan</span>
@@ -62,8 +65,24 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      title: "",
+      day: "",
+    };
   },
   props: ["state_event", "hide_event"],
+  methods: {
+    async addScheduleItem() {
+      await this.$axios
+        .$post("schedule?email=" + localStorage.getItem("USER_EMAIL"), {
+          title: this.title,
+          day: this.day,
+        })
+        .then((response) => {
+          const result = response;
+          console.log(result);
+        });
+    },
+  },
 };
 </script>
