@@ -3,17 +3,31 @@
     <div class="w-full" v-for="(schedule, day) in listSchedules">
       <div class="head p-5 bg-white special-round">
         <nuxt-link :to="'/schedule/' + day">
-          <p class="day font-semibold text-2xl" :data-cy="'card-title-' + hari">
-            {{ day }}
+          <p class="day font-semibold text-2xl" :data-cy="'card-title-' + day">
+            {{
+              day === "monday"
+                ? "Senin"
+                : day === "tuesday"
+                ? "Selasa"
+                : day === "wednesday"
+                ? "Rabu"
+                : day === "thursday"
+                ? "Kamis"
+                : "Jumat"
+            }}
           </p>
           <p
             v-if="schedule === 0"
-            class="desc text-slate-400"
-            :data-cy="'card-desc-' + hari"
+            class="desc text-slate-400 text-sm"
+            :data-cy="'card-desc-' + day"
           >
             Belum ada mata kuliah
           </p>
-          <p v-else class="desc text-pink-400" :data-cy="'card-desc-' + hari">
+          <p
+            v-else
+            class="desc text-pink-400 text-sm"
+            :data-cy="'card-desc-' + day"
+          >
             {{ schedule }} Mata Kuliah
           </p>
         </nuxt-link>
@@ -98,7 +112,6 @@ export default {
       listItemScheduleFriday: [],
     };
   },
-  props: ["hari", "jumlahmk"],
   mounted() {
     this.getAllSchedule();
   },

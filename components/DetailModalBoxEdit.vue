@@ -60,16 +60,16 @@
 export default {
   data() {
     return {
-      title_schedule: "",
+      titleSchedule: "",
     };
   },
-  props: ["state_event", "hide_event", "title_schedule", "id_schedule"],
+  props: ["state_event", "hide_event", "id_schedule"],
   methods: {
     async editItemSchedule(id) {
       await this.$axios.$patch(
         "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&id=" + id,
         {
-          title: this.title_schedule,
+          title: this.titleSchedule,
         }
       );
     },

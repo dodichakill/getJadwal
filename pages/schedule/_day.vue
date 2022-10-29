@@ -25,7 +25,15 @@
                 data-cy="btn-back"
               />
               <span class="day ml-2 font-semibold" data-cy="detail-title">{{
-                $route.params.day
+                $route.params.day === "monday"
+                  ? "Senin"
+                  : $route.params.day === "tuesday"
+                  ? "Selasa"
+                  : $route.params.day === "wednesday"
+                  ? "Rabu"
+                  : $route.params.day === "thursday"
+                  ? "Kamis"
+                  : "Jumat"
               }}</span>
             </nuxt-link>
           </div>
@@ -97,7 +105,7 @@ export default {
     };
   },
   mounted() {
-    // this.addScheduleItem();
+    this.checkCredential();
     this.getDetailSchedule();
   },
 
@@ -114,6 +122,15 @@ export default {
           this.listSchedules = response.data;
           console.log(this.listSchedules);
         });
+    },
+
+    checkCredential() {
+      if (!process.server) {
+        const emailValid = localStorage.getItem("USER_EMAIL");
+        if (!emailValid || emailValid === "") {
+          window.location.assign("/");
+        }
+      }
     },
 
     // toggle state

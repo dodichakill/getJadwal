@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="p-5 w-full bg-black text-white">
-      <div class="container flex justify-between m-auto">
+      <div class="container md:max-w-5xl flex justify-between m-auto">
         <h1 class="font-semibold text-3xl">GetJadwal</h1>
         <button
           class="btn px-4 py-2 bg-pink-400 rounded-lg font-semibold"
@@ -13,7 +13,7 @@
       </div>
     </header>
     <div class="min-h-screen h-auto relative w-full bg-slate-200">
-      <div class="container m-auto">
+      <div class="container md:max-w-5xl m-auto">
         <!-- btn create schedule start -->
         <button
           class="rounded-full bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white h-14 px-4 py-4 font-bold mt-12 mb-10 shadow-lg shadow-pink-300"
@@ -61,9 +61,7 @@ export default {
     };
   },
   mounted() {
-    // if (process.client) {
-    //   this.getAllSchedule();
-    // }
+    this.checkCredential();
   },
   methods: {
     async getDetailItemSchedule() {
@@ -78,6 +76,15 @@ export default {
           this.listSchedules = response.data;
           console.log(this.listSchedules);
         });
+    },
+
+    checkCredential() {
+      if (!process.server) {
+        const emailValid = localStorage.getItem("USER_EMAIL");
+        if (!emailValid || emailValid === "") {
+          window.location.assign("/");
+        }
+      }
     },
 
     showModalBox() {
