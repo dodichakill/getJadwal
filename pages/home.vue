@@ -6,8 +6,9 @@
         <button
           class="btn px-4 py-2 bg-pink-400 rounded-lg font-semibold"
           data-cy="btn-logout"
+          @click="logout"
         >
-          Check Out | Yourmail@mail.com
+          Check Out | {{ email }}
         </button>
       </div>
     </header>
@@ -26,91 +27,78 @@
 
         <!-- card jadwal start -->
         <div class="card-container flex gap-4 w-full">
-          <CardJadwal hari="Senin" jumlahmatkul="3"></CardJadwal>
-          <CardJadwal hari="Selasa" jumlahmatkul="3"></CardJadwal>
-          <CardJadwal hari="Rabu" jumlahmatkul="3"></CardJadwal>
-          <CardJadwal hari="Kamis" jumlahmatkul="3"></CardJadwal>
-          <CardJadwal hari="Jumat" jumlahmatkul="3"></CardJadwal>
+          <CardJadwal hari="Senin" :jumlahmk="jumlahMKSenin"></CardJadwal>
+          <CardJadwal hari="Selasa" :jumlahmk="jumlahMKSelasa"></CardJadwal>
+          <CardJadwal hari="Rabu" :jumlahmk="jumlahMKRabu"></CardJadwal>
+          <CardJadwal hari="Kamis" :jumlahmk="jumlahMKKamis"></CardJadwal>
+          <CardJadwal hari="Jumat" :jumlahmk="jumlahMKJumat"></CardJadwal>
         </div>
         <!-- card jadwal end -->
       </div>
     </div>
-    <!-- modal start-->
-    <div
-      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex ease-in duration-100"
-      v-if="isShowModalBox"
-    >
-      <!-- modal content start -->
-      <form class="p-8 bg-white w-96 m-auto h-96 rounded-lg" data-cy="form-add">
-        <h2 class="text-center mb-5 text-2xl font-semibold">
-          Buat Jadwal Kuliah
-        </h2>
-        <label for="matkul" class="font-semibold border-t-2 w-full block pt-3"
-          >Mata Kuliah</label
-        >
-        <input
-          type="text"
-          name="matkul"
-          data-cy="form-matkul"
-          id="matkul"
-          class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
-          placeholder="Masukan Mata Kuliah"
-        />
-        <label for="day" class="font-semibold">Pilih Hari</label>
-        <select
-          name="day"
-          id="day"
-          class="block px-3 py-2 w-full bg-white border-2 rounded-lg cus:outline-2 focus:outline-pink-400"
-          data-cy="form-day"
-          placeholder="Pilih Hari"
-        >
-          <option value="Senin">Senin</option>
-          <option value="Selasa">Selasa</option>
-          <option value="Rabu">Rabu</option>
-          <option value="Kamis">Kamis</option>
-          <option value="Jumat">Jumat</option>
-        </select>
-
-        <div
-          class="mt-6 text-white border-t-2 font-semibold flex justify-between"
-        >
-          <button
-            class="px-6 py-2 bg-white border-2 border-red-400 text-red-400 rounded-full mt-5 shadow-lg shadow-red-300"
-            data-cy="close-modal"
-            @click="hideModalBox"
-          >
-            <font-awesome-icon icon="fa-solid fa-circle-xmark" />
-            <span class="ml-2">Batalkan</span>
-          </button>
-          <button
-            class="px-6 py-2 cursor-not-allowed border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
-            data-cy="btn-submit"
-          >
-            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
-            <span class="ml-2">Simpan</span>
-          </button>
-        </div>
-      </form>
-      <!-- modal content end -->
-    </div>
-    <!-- modal end-->
+    <HomeModalBoxAdd :state_event="isShowModalBox" :hide_event="hideModalBox" />
   </div>
 </template>
 
 <script>
+import HomeModalBoxAdd from "~/components/HomeModalBoxAdd.vue";
+
+const userEmail = process.server ? "" : localStorage.getItem("USER_EMAIL");
+
+// ketika script diload di sisi client
+let backToLogin;
+if (process.client) {
+  backToLogin = () => {
+    window.location.replace("/");
+  };
+  // jika email tidak terdaftar maka kembali ke halaman index/login
+  if (userEmail === "") {
+    backToLogin();
+  }
+}
+
 export default {
   data() {
     return {
       isShowModalBox: false,
+      email: userEmail,
+      scheduleSenin: this.getAllSchedule().Monday,
+      jumlahMKSenin: 0,
+      jumlahMKSelasa: 0,
+      jumlahMKRabu: 0,
+      jumlahMKKamis: 0,
+      jumlahMKJumat: 0,
     };
   },
+  mounted() {
+    // if (process.client) {
+    //   this.getAllSchedule();
+    // }
+  },
   methods: {
+    async getAllSchedule() {
+      await this.$axios
+        .$get("schedule?email=" + localStorage.getItem("USER_EMAIL"))
+        .then((response) => {
+          const result = response.data;
+          this.jumlahMKSenin = result.monday;
+          this.jumlahMKSelasa = result.tuesday;
+          this.jumlahMKRabu = result.wednesday;
+          this.jumlahMKKamis = result.thursday;
+          this.jumlahMKJumat = result.friday;
+        });
+    },
     showModalBox() {
       this.isShowModalBox = true;
     },
     hideModalBox() {
       this.isShowModalBox = false;
     },
+    logout() {
+      localStorage.clear();
+      backToLogin();
+    },
   },
+  components: { HomeModalBoxAdd },
 };
 </script>

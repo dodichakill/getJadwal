@@ -5,8 +5,15 @@
         <p class="day font-semibold text-2xl" :data-cy="'card-title-' + hari">
           {{ hari }}
         </p>
-        <p class="desc text-pink-400" :data-cy="'card-desc-' + hari">
-          {{ jumlahmatkul }} Mata Kuliah
+        <p
+          v-if="jumlahmk == 0"
+          class="desc text-slate-400"
+          :data-cy="'card-desc-' + hari"
+        >
+          Belum ada mata kuliah
+        </p>
+        <p v-else class="desc text-pink-400" :data-cy="'card-desc-' + hari">
+          {{ jumlahmk }} Mata Kuliah
         </p>
       </nuxt-link>
     </div>
@@ -20,7 +27,7 @@
 
 <script>
 export default {
-  props: ["hari", "jumlahmatkul"],
+  props: ["hari", "jumlahmk"],
 };
 </script>
 

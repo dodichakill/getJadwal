@@ -19,10 +19,10 @@
           id="email"
           class="bg-slate-100 rounded-md block border-spacing-1 mb-2 p-3 w-full border-2 border-slate-300 outline-2 focus:outline-pink-400"
           placeholder="masukan alamat email anda"
-          required
+          @change="validateEmail"
           data-cy="input-email"
+          required
           v-model="email"
-          @change="validateEmail()"
         />
         <div class="if" v-if="error">
           <p class="text-red-500">
@@ -32,9 +32,21 @@
             >
           </p>
         </div>
+
         <button
-          class="rounded-full mt-3 shadow-lg shadow-pink-300 bg-pink-400 hover:bg-pink-500 active:bg-pink-600 text-white px-2 py-4 w-full font-bold"
+          v-if="error === true || email === ''"
+          class="rounded-full mt-3 shadow-lg shadow-slate-300 bg-slate-400 text-white px-2 py-4 w-full font-bold cursor-not-allowed"
           data-cy="btn-login"
+          disabled
+        >
+          Mulai Sesi
+        </button>
+
+        <button
+          v-else
+          class="rounded-full mt-3 shadow-lg shadow-pink-300 bg-pink-400 active:bg-pink-600 text-white px-2 py-4 w-full font-bold cursor-pointer"
+          data-cy="btn-login"
+          @click="checkinEmail"
         >
           Mulai Sesi
         </button>
@@ -45,30 +57,43 @@
 </template>
 
 <script>
-var axios = require("axios");
-var data = '{\r\n    "email": "john@email.com"\r\n}';
-
-var config = {
-  method: "post",
-  url: "https://getjadwal.api.devcode.gethired.id/checkin",
-  headers: {},
-  data: data,
-};
-
 export default {
   name: "IndexPage",
   data() {
     return {
       error: false,
       email: "",
+      savedEmail: "",
+      savedId: "",
     };
   },
+  watch: {
+    email(value) {
+      this.email = value;
+      this.validateEmail(value);
+    },
+  },
   methods: {
-    validateEmail() {
-      const elmEmail = document.querySelector('input["email"]');
-      if (
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(elmEmail.value)
-      ) {
+    async checkinEmail() {
+      try {
+        await this.$axios
+          .$post("/checkin", {
+            email: this.email,
+          })
+          .then((response) => {
+            const result = response.data;
+            console.log(result);
+            this.savedEmail = result.email;
+            localStorage.setItem("USER_EMAIL", this.savedEmail);
+            console.log(localStorage.getItem("USER_EMAIL"));
+            window.location.replace("/home");
+          });
+      } catch (error) {
+        this.error = true;
+      }
+    },
+    validateEmail(value) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
         this.error = false;
       } else {
         this.error = true;

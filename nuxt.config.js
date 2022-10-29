@@ -31,6 +31,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     "@nuxtjs/tailwindcss",
     "@nuxtjs/fontawesome",
+    "@pinia/nuxt",
   ],
 
   fontawesome: {
@@ -44,6 +45,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
+    "@pinia/nuxt",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

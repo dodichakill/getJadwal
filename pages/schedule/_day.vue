@@ -1,18 +1,19 @@
 <template>
   <div>
     <header class="p-5 w-full bg-black text-white">
-      <div class="container flex justify-between m-auto">
+      <div class="container md:max-w-5xl flex justify-between m-auto">
         <h1 class="font-semibold text-3xl">GetJadwal</h1>
         <button
           class="btn px-4 py-2 bg-pink-400 rounded-lg font-semibold"
           data-cy="btn-logout"
+          @click="logout"
         >
-          Check Out | Yourmail@mail.com
+          Check Out | {{ email }}
         </button>
       </div>
     </header>
     <div class="min-h-screen h-auto relative w-full bg-slate-200">
-      <div class="container m-auto">
+      <div class="container md:max-w-5xl m-auto">
         <div
           class="flex justify-between pt-8 pb-8 items-center"
           style="border-bottom: 2px solid rgba(0, 0, 0, 0.15)"
@@ -39,7 +40,7 @@
         </div>
 
         <!-- image empty start -->
-        <div class="flex hidden">
+        <div class="flex" v-if="scheduleLength == 0">
           <img
             src="~/assets/todo-empty-state.png"
             alt="image-todo-empty"
@@ -49,33 +50,21 @@
         </div>
         <!-- image empty end -->
 
-        <!-- card item start -->
-        <div class="card-item-container w-full mt-10" data-cy="card-item-title">
-          <div
-            class="px-5 py-3 rounded-lg flex bg-white items-center justify-between mt-2 shadow-md"
-          >
-            <div class="item-name text-xl text-slate-600">Statistika cuy</div>
-            <div class="action text-xl">
-              <button
-                class="p-2 text-slate-400 hover:text-slate-500"
-                title="edit jadwal"
-                data-cy="card-item-edit"
-                @click="showEditModalBox"
-              >
-                <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-              </button>
-              <button
-                class="p-2 text-slate-400 hover:text-red-500"
-                title="hapus jadwal"
-                data-cy="card-item-delete"
-                @click="showDeleteModalBox"
-              >
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-            </div>
-          </div>
+        <!-- list item MK start-->
+        <div class="container w-full mt-10">
+          <CardDetailItem
+            nama_mk="Algoritma Komputer Dasar"
+            :show_edit_event="showAddModalBox"
+            :show_delete_event="showDeleteModalBox"
+          />
+
+          <CardDetailItem
+            nama_mk="Algoritma Komputer Dasar"
+            :show_edit_event="showAddModalBox"
+            :show_delete_event="showDeleteModalBox"
+          />
         </div>
-        <!-- card item end -->
+        <!-- list item MK end -->
       </div>
     </div>
 
@@ -105,7 +94,21 @@
 </template>
 
 <script>
+import CardDetailItem from "~/components/CardDetailItem.vue";
 import DetailModalBoxDelete from "~/components/DetailModalBoxDelete.vue";
+
+const userEmail = process.server ? "" : localStorage.getItem("USER_EMAIL");
+// ketika script diload di sisi client
+let backToLogin;
+if (process.client) {
+  backToLogin = () => {
+    window.location.replace("/");
+  };
+  // jika email tidak terdaftar maka kembali ke halaman index/login
+  if (userEmail === "") {
+    backToLogin();
+  }
+}
 
 export default {
   data() {
@@ -114,9 +117,26 @@ export default {
       isShowAddModalBox: false,
       isShowDeleteModalBox: false,
       isShowToast: false,
+      email: userEmail,
+      scheduleLength: 0,
     };
   },
+  mounted() {
+    this.getDetailSchedule();
+  },
   methods: {
+    async getDetailSchedule() {
+      await this.$axios
+        .$get(
+          "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&day=monday"
+        )
+        .then((response) => {
+          const result = response.data;
+          console.log(result);
+        });
+    },
+
+    // toggle state
     showAddModalBox() {
       this.isShowAddModalBox = true;
     },
@@ -141,7 +161,11 @@ export default {
     hideToast() {
       this.isShowToast = false;
     },
+    logout() {
+      localStorage.clear();
+      backToLogin();
+    },
   },
-  components: { DetailModalBoxDelete },
+  components: { DetailModalBoxDelete, CardDetailItem },
 };
 </script>
