@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex ease-in duration-100"
+    class="modal-back fixed top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex ease-in duration-100"
     v-if="state_event"
   >
     <!-- modal content start -->

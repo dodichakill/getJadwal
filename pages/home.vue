@@ -27,11 +27,11 @@
 
         <!-- card jadwal start -->
         <div class="card-container flex gap-4 w-full">
-          <CardJadwal hari="Senin" :jumlahmk="jumlahMKSenin"></CardJadwal>
-          <CardJadwal hari="Selasa" :jumlahmk="jumlahMKSelasa"></CardJadwal>
-          <CardJadwal hari="Rabu" :jumlahmk="jumlahMKRabu"></CardJadwal>
-          <CardJadwal hari="Kamis" :jumlahmk="jumlahMKKamis"></CardJadwal>
-          <CardJadwal hari="Jumat" :jumlahmk="jumlahMKJumat"></CardJadwal>
+          <CardJadwal hari="monday" :jumlahmk="jumlahMKSenin"></CardJadwal>
+          <CardJadwal hari="tuesday" :jumlahmk="jumlahMKSelasa"></CardJadwal>
+          <CardJadwal hari="wednesday" :jumlahmk="jumlahMKRabu"></CardJadwal>
+          <CardJadwal hari="thursday" :jumlahmk="jumlahMKKamis"></CardJadwal>
+          <CardJadwal hari="friday" :jumlahmk="jumlahMKJumat"></CardJadwal>
         </div>
         <!-- card jadwal end -->
       </div>
@@ -62,7 +62,6 @@ export default {
     return {
       isShowModalBox: false,
       email: userEmail,
-      scheduleSenin: this.getAllSchedule().Monday,
       jumlahMKSenin: 0,
       jumlahMKSelasa: 0,
       jumlahMKRabu: 0,

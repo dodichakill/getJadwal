@@ -39,27 +39,12 @@
           </button>
         </div>
 
-        <!-- image empty start -->
-        <div class="flex" v-if="scheduleLength == 0">
-          <img
-            src="~/assets/todo-empty-state.png"
-            alt="image-todo-empty"
-            class="w-1/2 xl:w-1/3 m-auto mt-10"
-            data-cy="todo-empty-state"
-          />
-        </div>
-        <!-- image empty end -->
+        <ImageEmptyItem :condition="scheduleLength" />
 
         <!-- list item MK start-->
-        <div class="container w-full mt-10">
+        <div class="container w-full mt-10" v-for="item in listSchedules">
           <CardDetailItem
-            nama_mk="Algoritma Komputer Dasar"
-            :show_edit_event="showAddModalBox"
-            :show_delete_event="showDeleteModalBox"
-          />
-
-          <CardDetailItem
-            nama_mk="Algoritma Komputer Dasar"
+            :nama_mk="item.title"
             :show_edit_event="showAddModalBox"
             :show_delete_event="showDeleteModalBox"
           />
@@ -96,6 +81,7 @@
 <script>
 import CardDetailItem from "~/components/CardDetailItem.vue";
 import DetailModalBoxDelete from "~/components/DetailModalBoxDelete.vue";
+import ImageEmptyItem from "~/components/ImageEmptyItem.vue";
 
 const userEmail = process.server ? "" : localStorage.getItem("USER_EMAIL");
 // ketika script diload di sisi client
@@ -119,26 +105,47 @@ export default {
       isShowToast: false,
       email: userEmail,
       scheduleLength: 0,
+      listSchedules: [],
+      day: this.$route.params.day,
     };
   },
   mounted() {
+    // this.addScheduleItem();
     this.getDetailSchedule();
   },
+
   methods: {
-    async getDetailSchedule() {
+    async addScheduleItem() {
       await this.$axios
-        .$get(
-          "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&day=monday"
-        )
+        .$post("schedule?email=" + localStorage.getItem("USER_EMAIL"), {
+          title: "Algoritma dasar",
+          day: this.day,
+        })
         .then((response) => {
           const result = response.data;
           console.log(result);
+          console.log(this.day);
+        });
+    },
+
+    async getDetailSchedule() {
+      await this.$axios
+        .$get(
+          "/schedule?email=" +
+            localStorage.getItem("USER_EMAIL") +
+            "&day=" +
+            this.day
+        )
+        .then((response) => {
+          this.listSchedules = response.data;
+          console.log(this.listSchedules);
         });
     },
 
     // toggle state
     showAddModalBox() {
       this.isShowAddModalBox = true;
+      console.log(this.day);
     },
     showEditModalBox() {
       this.isShowEditModalBox = true;
@@ -166,6 +173,6 @@ export default {
       backToLogin();
     },
   },
-  components: { DetailModalBoxDelete, CardDetailItem },
+  components: { DetailModalBoxDelete, CardDetailItem, ImageEmptyItem },
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <!-- modal add jadwal start-->
     <div
-      class="modal-back absolute top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
+      class="modal-back fixed top-0 left-0 right-0 bottom-0 bg-slate-700/50 min-h-screen flex"
       v-if="state_event"
     >
       <!-- modal content start -->

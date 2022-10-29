@@ -1,8 +1,8 @@
 <template>
   <!-- card item start -->
-  <div class="card-item-container w-full mb-5" data-cy="card-item-title">
+  <div class="card-item-container w-full mb-2" data-cy="card-item-title">
     <div
-      class="px-5 py-3 rounded-lg flex bg-white items-center justify-between mt-2 shadow-md"
+      class="px-5 py-3 rounded-lg flex bg-white items-center justify-between shadow-md"
     >
       <div class="item-name text-xl text-slate-600">{{ nama_mk }}</div>
       <div class="action text-xl">
