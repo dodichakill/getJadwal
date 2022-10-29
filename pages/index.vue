@@ -19,7 +19,6 @@
           id="email"
           class="bg-slate-100 rounded-md block border-spacing-1 mb-2 p-3 w-full border-2 border-slate-300 outline-2 focus:outline-pink-400"
           placeholder="masukan alamat email anda"
-          @change="validateEmail"
           data-cy="input-email"
           required
           v-model="email"
@@ -67,12 +66,6 @@ export default {
       savedId: "",
     };
   },
-  watch: {
-    email(value) {
-      this.email = value;
-      this.validateEmail(value);
-    },
-  },
   methods: {
     async checkinEmail() {
       try {
@@ -89,13 +82,6 @@ export default {
             window.location.replace("/home");
           });
       } catch (error) {
-        this.error = true;
-      }
-    },
-    validateEmail(value) {
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-        this.error = false;
-      } else {
         this.error = true;
       }
     },
