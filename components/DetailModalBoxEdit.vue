@@ -23,9 +23,10 @@
           type="text"
           name="edit-matkul"
           data-cy="form-matkul"
-          v-model="titleSchedule"
+          v-model="title_schedule"
           id="edit-matkul"
           class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
+          value="statistika"
         />
 
         <div
@@ -43,7 +44,7 @@
             class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
             @click="editItemSchedule(id_schedule, title_schedule)"
-            v-if="titleSchedule"
+            v-if="title_schedule"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             <span class="ml-2">Simpan</span>
@@ -69,7 +70,7 @@
 export default {
   data() {
     return {
-      titleSchedule: "",
+      title_schedule: "",
     };
   },
   props: ["state_event", "hide_event", "id_schedule", "title_schedule"],
@@ -78,7 +79,7 @@ export default {
       await this.$axios.$patch(
         "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&id=" + id,
         {
-          title: this.titleSchedule,
+          title: this.title_schedule,
         }
       );
     },
