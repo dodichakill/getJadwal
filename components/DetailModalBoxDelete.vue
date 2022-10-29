@@ -35,7 +35,7 @@
           <button
             class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
-            type="submit"
+            @click="deleteItemSchedule(id_schedule)"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             <span class="ml-2">Hapus</span>
@@ -51,8 +51,24 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      idSchedule: 0,
+    };
   },
-  props: ["state_event", "hide_event"],
+  mounted() {
+    // this.deleteItemSchedule(63);
+  },
+  props: ["state_event", "hide_event", "id_schedule"],
+  methods: {
+    async deleteItemSchedule(id) {
+      await this.$axios.$delete(
+        "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&id=" + id
+      );
+      console.log(id);
+      console.log(
+        "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&id=" + id
+      );
+    },
+  },
 };
 </script>

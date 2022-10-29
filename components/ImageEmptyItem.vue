@@ -4,7 +4,7 @@
     <img
       src="~/assets/todo-empty-state.png"
       alt="image-todo-empty"
-      class="w-1/2 xl:w-1/3 m-auto mt-10"
+      class="w-1/2 xl:w-1/3 m-auto mt-5"
       data-cy="todo-empty-state"
     />
   </div>

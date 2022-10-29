@@ -15,7 +15,7 @@
     <div class="min-h-screen h-auto relative w-full bg-slate-200">
       <div class="container md:max-w-5xl m-auto">
         <div
-          class="flex justify-between pt-8 pb-8 items-center"
+          class="flex justify-between pt-8 pb-8 mb-5 items-center"
           style="border-bottom: 2px solid rgba(0, 0, 0, 0.15)"
         >
           <div class="text-2xl">
@@ -42,12 +42,8 @@
         <ImageEmptyItem :condition="scheduleLength" />
 
         <!-- list item MK start-->
-        <div class="container w-full mt-10" v-for="item in listSchedules">
-          <CardDetailItem
-            :nama_mk="item.title"
-            :show_edit_event="showAddModalBox"
-            :show_delete_event="showDeleteModalBox"
-          />
+        <div class="container w-full mt-5" v-for="item in listSchedules">
+          <CardDetailItem :nama_mk="item.title" :id_mk="item.id" />
         </div>
         <!-- list item MK end -->
       </div>
@@ -58,15 +54,6 @@
       :hide_event="hideAddModalBox"
     />
 
-    <DetailModalBoxEdit
-      :state_event="isShowEditModalBox"
-      :hide_event="hideEditModalBox"
-    />
-
-    <DetailModalBoxDelete
-      :state_event="isShowDeleteModalBox"
-      :hide_event="hideDeleteModalBox"
-    />
     <!-- toast start -->
     <p
       class="toast px-3 py-2 w-72 m-auto rounded-lg bg-green-400 inlineblock absolute top-16 left-0 right-0 shadow shadow-green-200 hidden"
@@ -134,23 +121,12 @@ export default {
       this.isShowAddModalBox = true;
       console.log(this.day);
     },
-    showEditModalBox() {
-      this.isShowEditModalBox = true;
-    },
-    showDeleteModalBox() {
-      this.isShowDeleteModalBox = true;
-    },
+
     showToast() {
       this.isShowToast = true;
     },
     hideAddModalBox() {
       this.isShowAddModalBox = false;
-    },
-    hideEditModalBox() {
-      this.isShowEditModalBox = false;
-    },
-    hideDeleteModalBox() {
-      this.isShowDeleteModalBox = false;
     },
     hideToast() {
       this.isShowToast = false;

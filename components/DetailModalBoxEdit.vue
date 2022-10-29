@@ -22,6 +22,7 @@
         <input
           type="text"
           name="edit-matkul"
+          v-model="title_schedule"
           data-cy="form-matkul"
           id="edit-matkul"
           class="outline block outline-1 px-3 py-2 rounded-lg outline-slate-300 mt-1 w-full mb-5 focus:outline-2 focus:outline-pink-400"
@@ -42,7 +43,7 @@
           <button
             class="px-6 py-2 border-pink-400 border-2 bg-pink-400 rounded-full mt-5 shadow-lg shadow-pink-300"
             data-cy="btn-submit"
-            type="submit"
+            @click="editItemSchedule(id_schedule, title_schedule)"
           >
             <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             <span class="ml-2">Simpan</span>
@@ -58,8 +59,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      title_schedule: "",
+    };
   },
-  props: ["state_event", "hide_event"],
+  props: ["state_event", "hide_event", "title_schedule", "id_schedule"],
+  methods: {
+    async editItemSchedule(id) {
+      await this.$axios.$patch(
+        "schedule?email=" + localStorage.getItem("USER_EMAIL") + "&id=" + id,
+        {
+          title: this.title_schedule,
+        }
+      );
+    },
+  },
 };
 </script>
